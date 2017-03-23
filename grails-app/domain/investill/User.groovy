@@ -1,6 +1,6 @@
 package investill
 
-class Usuario {
+class User {
 
     static constraints = {
     }
