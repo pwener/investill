@@ -32,7 +32,7 @@
 # "temporary" build files
 /target
 
-/build/
+/build
 .gradle
 .idea
 *.iml
