@@ -36,3 +36,5 @@
 .gradle
 .idea
 *.iml
+
+*.asscache
