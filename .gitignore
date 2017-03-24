@@ -38,6 +38,3 @@
 *.iml
 *.asscache
 .gradle/*
-
-# temp ignore because user conf
-/grails-app/conf/application.yml
