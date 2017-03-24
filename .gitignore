@@ -36,6 +36,6 @@
 .gradle
 .idea
 *.iml
-grails-app/conf/application.yml
 *.asscache
 .gradle/*
+grails-app/conf/application.yml
