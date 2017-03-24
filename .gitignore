@@ -38,4 +38,4 @@
 *.iml
 *.asscache
 .gradle/*
-grails-app/conf/application.yml
+/grails-app/conf/application.yml
