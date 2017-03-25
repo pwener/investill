@@ -17,9 +17,22 @@
         <div id="show-secUser" class="content scaffold-show" role="main">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+              <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="secUser" />
+            <ul align="center">
+              <li>
+                <f:display bean="secUser" property="username"/>
+              </li>
+              <li>
+                <f:display bean="secUser" property="firstName"/>
+              </li>
+              <li>
+                <f:display bean="secUser" property="lastName"/>
+              </li>
+              <li>
+                <f:display bean="secUser" property="email"/>
+              </li>
+            </ul>
             <g:form resource="${this.secUser}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.secUser}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
