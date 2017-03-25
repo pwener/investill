@@ -4,8 +4,8 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.security.access.annotation.Secured
 
+@Secured(['ROLE_USER'])
 @Transactional(readOnly = true)
-@Secured(['ROLE_ADMIN'])
 class SecUserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -19,10 +19,12 @@ class SecUserController {
         respond secUser
     }
 
+    @Secured(['permitAll'])
     def create() {
         respond new SecUser(params)
     }
 
+    @Secured(['permitAll'])
     @Transactional
     def save(SecUser secUser) {
         if (secUser == null) {
@@ -38,6 +40,7 @@ class SecUserController {
         }
 
         secUser.save flush:true
+        SecUserSecRole.create secUser, SecRole.findByAuthority('ROLE_USER')
 
         request.withFormat {
             form multipartForm {

@@ -11,6 +11,9 @@ class SecUser implements Serializable {
 
 	transient springSecurityService
 
+	String firstName
+	String lastName
+	String email
 	String username
 	String password
 	boolean enabled = true
@@ -36,12 +39,15 @@ class SecUser implements Serializable {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 
-	static transients = ['springSecurityService']
-
 	static constraints = {
-		password blank: false, password: true
-		username blank: false, unique: true
+		firstName(size:1..120, nullable: false, blank: false)
+		lastName(size:1..120, nullable: false, blank: false)
+		email(email: true, size:1..120, nullable: false, blank: false, unique: true)
+		username(size: 4..20, blank: false, unique: true, nullable: false)
+		password(blank: false, password: true, nullable: false)
 	}
+
+	static transients = ['springSecurityService']
 
 	static mapping = {
 		password column: '`password`'
