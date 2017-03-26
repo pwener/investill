@@ -5,12 +5,15 @@ import groovy.transform.ToString
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
-class SecAppUser implements Serializable {
+class SecUser implements Serializable {
 
 	private static final long serialVersionUID = 1
 
 	transient springSecurityService
 
+	String firstName
+	String lastName
+	String email
 	String username
 	String password
 	boolean enabled = true
@@ -18,8 +21,8 @@ class SecAppUser implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 
-	Set<SecAppRole> getAuthorities() {
-		SecAppUserSecAppRole.findAllBySecAppUser(this)*.secAppRole
+	Set<SecRole> getAuthorities() {
+		SecUserSecRole.findAllBySecUser(this)*.secRole
 	}
 
 	def beforeInsert() {
@@ -36,12 +39,15 @@ class SecAppUser implements Serializable {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 
-	static transients = ['springSecurityService']
-
 	static constraints = {
-		password blank: false, password: true
-		username blank: false, unique: true
+		firstName(size:1..120, nullable: false, blank: false)
+		lastName(size:1..120, nullable: false, blank: false)
+		email(email: true, size:1..120, nullable: false, blank: false, unique: true)
+		username(size: 4..20, blank: false, unique: true, nullable: false)
+		password(blank: false, password: true, nullable: false)
 	}
+
+	static transients = ['springSecurityService']
 
 	static mapping = {
 		password column: '`password`'
