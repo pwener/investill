@@ -4,15 +4,18 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(SecUserController)
-@Mock(SecUser)
+@Mock([SecUser, SecRole, SecUserSecRole])
 class SecUserControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
 
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        params["firstName"] = 'Coder'
+        params["lastName"] = 'Tester'
+        params["email"] = 'test@test.com'
+        params["username"] = 'testCoder'
+        params["password"] = 'testCoder'
     }
 
     void "Test the index action returns the correct model"() {

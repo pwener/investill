@@ -1,4 +1,0 @@
-package investill
-
-class User {
-}

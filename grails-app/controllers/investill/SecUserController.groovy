@@ -39,12 +39,13 @@ class SecUserController {
             return
         }
 
-        secUser.save flush:true
+        secUser.save flush:true, failOnError: true
         SecUserSecRole.create secUser, SecRole.findByAuthority('ROLE_USER')
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'secUser.label', default: 'SecUser'), secUser.id])
+                flash.message = message(code: 'default.created.message',
+                  args: [message(code: 'secUser.label', default: 'SecUser'), secUser.id])
                 redirect secUser
             }
             '*' { respond secUser, [status: CREATED] }
