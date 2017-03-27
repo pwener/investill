@@ -39,10 +39,14 @@
     </div>
 
     <div class="container">
-      <g:layoutBody/>
+      <footer class="footer">
+      <p class="text-muted">Investill 2017 - UnB FGA</p>
+      </footer>
     </div>
 
-    <div class="footer" role="contentinfo"></div>
+    <div class="container">
+      <g:layoutBody/>
+    </div>
 
     <div id="spinner" class="spinner" style="display:none;">
         <g:message code="spinner.alt" default="Loading&hellip;"/>
